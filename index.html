@@ -15,7 +15,6 @@
         color: #333;
       }
 
-      /* 顶部大图区域 */
       .hero {
         background-color: #1a3a5c;
         color: white;
@@ -40,7 +39,6 @@
         color: #ccc;
       }
 
-      /* 正文区域 */
       .section {
         max-width: 700px;
         margin: 60px auto;
@@ -57,7 +55,6 @@
         padding-bottom: 8px;
       }
 
-      /* 工作经历卡片 */
       .job {
         margin-bottom: 32px;
       }
@@ -87,22 +84,35 @@
         line-height: 1.8;
       }
 
-      /* 技能标签 */
       .skills {
         display: flex;
         flex-wrap: wrap;
         gap: 10px;
       }
 
+      /* 技能标签默认样式 */
       .tag {
         background: #eef3f8;
         color: #1a3a5c;
         padding: 6px 16px;
         border-radius: 20px;
         font-size: 14px;
+        cursor: pointer;
+        transition: all 0.2s;
+        user-select: none;
       }
 
-      /* 联系方式 */
+      /* 点击之后的样式 */
+      .tag.active {
+        background: #1a3a5c;
+        color: white;
+      }
+
+	.tag:hover {
+	  background: #1a3a5c;
+	  color: white;
+	}
+
       .contact a {
         display: inline-block;
         margin-right: 16px;
@@ -116,21 +126,126 @@
       .contact a:hover {
         color: #2d6098;
       }
+/* 动画初始状态：透明，位置偏下 */
+.section {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+/* 动画结束状态：正常显示 */
+.section.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* 项目卡片 */
+.project-card {
+  background: white;
+  border-radius: 10px;
+  padding: 24px;
+  margin-bottom: 20px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.project-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.10);
+}
+
+.project-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.project-title {
+  font-size: 18px;
+  font-weight: bold;
+  color: #1a3a5c;
+}
+
+.project-links a {
+  color: #2d6098;
+  text-decoration: none;
+  font-size: 14px;
+}
+
+.project-desc {
+  color: #555;
+  font-size: 15px;
+  line-height: 1.7;
+  margin-bottom: 16px;
+}
+
+.project-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+/* 导航栏 */
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  background: white;
+  padding: 16px 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+  z-index: 100;
+}
+
+.nav-name {
+  font-weight: bold;
+  color: #1a3a5c;
+  font-size: 18px;
+}
+
+.nav-links a {
+  margin-left: 28px;
+  color: #555;
+  text-decoration: none;
+  font-size: 15px;
+}
+
+.nav-links a:hover {
+  color: #1a3a5c;
+}
+
+/* 因为导航栏固定在顶部，需要把页面内容往下推一点 */
+.hero {
+  margin-top: 56px;
+}
     </style>
   </head>
   <body>
 
-    <!-- 顶部 -->
+<!-- 导航栏 -->
+<nav class="navbar">
+  <div class="nav-name">Peiyi</div>
+  <div class="nav-links">
+    <a href="#experience">Experience</a>
+    <a href="#projects">Projects</a>
+    <a href="#skills">Skills</a>
+    <a href="#education">Education</a>
+    <a href="#contact">Contact</a>
+  </div>
+</nav>
+
     <div class="hero">
       <h1>Peiyi</h1>
       <h2>Operations Specialist → AI Automation</h2>
       <p>Amsterdam · Open to work</p>
     </div>
 
-    <!-- 工作经历 -->
-    <div class="section">
+    <div class="section" id="experience">
       <h3>Work Experience</h3>
-
       <div class="job">
         <div class="role">Operations Specialist</div>
         <div class="company">Seine Holland B.V.</div>
@@ -143,8 +258,32 @@
       </div>
     </div>
 
-    <!-- 技能 -->
-    <div class="section">
+<!-- 项目展示 -->
+<div class="section" id="projects">
+  <h3>Projects</h3>
+
+  <div class="project-card">
+    <div class="project-header">
+      <div class="project-title">Holland2Stay 房源监控</div>
+      <div class="project-links">
+        <a href="https://github.com/jasperiver" target="_blank">GitHub →</a>
+      </div>
+    </div>
+    <p class="project-desc">
+      用 Python 自动监控 Holland2Stay 房源网站，发现新房源时通过 Gmail 发送邮件提醒。
+      涉及网页抓取、反爬处理、定时任务和邮件 API。
+    </p>
+    <div class="project-tags">
+      <span class="tag">Python</span>
+      <span class="tag">Web Scraping</span>
+      <span class="tag">Gmail API</span>
+      <span class="tag">Automation</span>
+    </div>
+  </div>
+
+</div>
+
+    <div class="section" id="skills">
       <h3>Skills</h3>
       <div class="skills">
         <span class="tag">Python</span>
@@ -157,8 +296,7 @@
       </div>
     </div>
 
-    <!-- 教育 -->
-    <div class="section">
+    <div class="section" id="education">
       <h3>Education</h3>
       <div class="job">
         <div class="role">BSc Econometrics & Data Science</div>
@@ -167,13 +305,38 @@
       </div>
     </div>
 
-    <!-- 联系方式 -->
-    <div class="section contact">
+    <div class="section" id="contact">
       <h3>Contact</h3>
-      <a href="mailto:p.he1107@outlook.com">your@email.com</a>
+      <a href="mailto:p.he1107@outlook.com">p.he1107@outlook.com</a>
       <a href="https://linkedin.com/in/yourprofile" target="_blank">LinkedIn</a>
-      <a href="https://github.com/yourprofile" target="_blank">GitHub</a>
+      <a href="https://github.com/jasperiver" target="_blank">GitHub</a>
     </div>
+
+    <!-- JavaScript 放在最底部 -->
+    <script>
+// 滚动动画
+const sections = document.querySelectorAll('.section')
+
+const observer = new IntersectionObserver(function(entries) {
+  entries.forEach(function(entry) {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible')
+    }
+  })
+})
+
+sections.forEach(function(section) {
+  observer.observe(section)
+})
+
+// 技能标签点击（保留之前的）
+const tags = document.querySelectorAll('.tag')
+tags.forEach(function(tag) {
+  tag.addEventListener('click', function() {
+    tag.classList.toggle('active')
+  })
+})
+    </script>
 
   </body>
 </html>
